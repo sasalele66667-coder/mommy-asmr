@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mommy ASMR - Pinned Collection</title>
+    <!-- Google Fonts for beautiful typography -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Fredoka:wght@300..700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Styling & Background */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Fredoka', sans-serif;
+            background: linear-gradient(180deg, #fff5f8 0%, #ffe3ec 100%);
+            color: #d15b8f;
+            min-height: 100vh;
+        }
+
+        /* Top Navigation Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: #ff5e97;
+            text-shadow: 2px 2px 0px #fff;
+        }
+
+        .logo-area span {
+            margin: 0 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #b84d7d;
+            font-weight: 600;
+            margin-left: 25px;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.2s;
+            display: inline-block;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ff5e97;
+            transform: scale(1.05);
+        }
+
+        /* Main Section Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        /* Section Title featuring a Pinned Theme */
+        .section-title {
+            font-size: 2.5rem;
+            font-family: 'Pacifico', cursive;
+            color: #ff5e97;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            text-shadow: 2px 2px 0px #fff;
+        }
+
+        /* Video Grid Layout */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        /* Video Card Styling */
+        .video-card {
+            background: #ffffff;
+            border: 4px solid #ffccd9;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(255, 182, 193, 0.3);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            position: relative;
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(255, 145, 168, 0.5);
+        }
+
+        /* Decorative Pin Tag for Featured/Pinned Vids */
+        .pin-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff5e97;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(255, 94, 151, 0.4);
+            z-index: 10;
+        }
+
+        /* Video Container Aspect Ratio */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: #221f22;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Info below Card Embeds */
+        .video-info {
+            margin-top: 15px;
+        }
+
+        .video-info h3 {
+            margin: 10px 0 5px 0;
+            font-size: 1.4rem;
+            color: #ff5e97;
+        }
+
+        .video-info p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #a8768e;
+            line-height: 1.4;
+        }
+
+        /* Bottom "Add Video" Interactive Stripe */
+        .action-banner {
+            margin-top: 60px;
+            background: linear-gradient(90deg, #ff9ebe 0%, #ff689d 100%);
+            padding: 30px;
+            border-radius: 30px;
+            color: white;
+            box-shadow: 0 10px 25px rgba(255, 104, 157, 0.4);
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .action-banner:hover {
+            transform: scale(1.03);
+        }
+
+        .action-banner h2 {
+            margin: 0;
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation Menu -->
+    <header>
+        <div class="logo-area">
+            <span>✨</span> Mommy ASMR <span>✨</span>
+        </div>
+        <nav>
+            <a href="#" class="active">Home</a>
+            <a href="#">Videos</a>
+            <a href="#">Add Video</a>
+            <a href="#">Features</a>
+            <a href="#">Interactive</a>
+        </nav>
+    </header>
+
+    <!-- Main Dynamic Space -->
+    <div class="container">
+        
+        <!-- Pinned Heading Header Section -->
+        <div class="section-title">
+            🎬 Pinned Masterpieces Collection
+        </div>
+
+        <!-- Card Grid Grid Layout -->
+        <div class="video-grid" id="videoGrid">
+            
+            <!-- Video 1 -->
+            <div class="video-card">
+                <div class="pin-tag">📌 Pinned</div>
+                <div class="video-wrapper">
+                    <iframe src="https://youtube.com" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Gentle Whispers</h3>
+                    <p>Soft spoken comfort to help you completely relax, destress, and drift off into a deep sleep.</p>
+                </div>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="video-card">
+                <div class="pin-tag">📌 Pinned</div>
+                <div class="video-wrapper">
+                    <iframe src="https://youtube.com" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Personal Attention</h3>
+                    <p>Meticulous care and calming affirmations giving you all the focused attention you need tonight.</p>
+                </div>
+            </div>
+
+            <!-- Video 3 -->
+            <div class="video-card">
+                <div class="pin-tag">📌 Pinned</div>
+                <div class="video-wrapper">
+                    <iframe src="https://youtube.com" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Cozy Bedtime Story</h3>
+                    <p>A beautifully serene, calming story to quiet your thoughts and safely help you drift away.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Add Your Favorite Action Footer Box -->
+        <div class="action-banner" id="addVideoBtn">
+            <h2>➕ Add Your Pinned Video</h2>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Interactive Functionality -->
+    <script>
+        document.getElementById('addVideoBtn').addEventListener('click', function() {
+            // 1. Gather info from the user
+            let videoUrl = prompt("Enter standard YouTube Video URL or Embed URL:");
+            if (!videoUrl) return; // Cancelled
+
+            let title = prompt("Enter video title:", "New Pinned ASMR");
+            if (!title) return;
+
+            let description = prompt("Enter a brief video description:", "Relax and enjoy this new pinned content.");
+            if (!description) return;
+
+            // 2. Helper to automatically convert normal watch links into embed links
+            function getEmbedUrl(url) {
+                let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                let match = url.match(regExp);
+                if (match && match[2].length == 11) {
+                    return "https://youtube.com" + match[2];
+                }
+                return url; // Fallback if they gave an embed directly
+            }
+
+            let finalEmbedSrc = getEmbedUrl(videoUrl);
+
+            // 3. Create structural markup for the new grid item card
+            const newCard = document.createElement('div');
+            newCard.className = 'video-card';
+            newCard.innerHTML = `
+                <div class="pin-tag">📌 Pinned</div>
+                <div class="video-wrapper">
+                    <iframe src="${finalEmbedSrc}" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>${title}</h3>
+                    <p>${description}</p>
+                </div>
+            `;
+
+            // 4. Append directly into our menu grid assembly line
+            document.getElementById('videoGrid').appendChild(newCard);
+        });
+    </script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mommy ASMR - Collection</title>
+    <!-- Google Fonts for beautiful typography -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Fredoka:wght@300..700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Styling & Background */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Fredoka', sans-serif;
+            background: linear-gradient(180deg, #fff5f8 0%, #ffe3ec 100%);
+            color: #d15b8f;
+            min-height: 100vh;
+        }
+
+        /* Top Navigation Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: #ff5e97;
+            text-shadow: 2px 2px 0px #fff;
+        }
+
+        .logo-area span {
+            margin: 0 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #b84d7d;
+            font-weight: 600;
+            margin-left: 25px;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.2s;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ff5e97;
+            transform: scale(1.05);
+        }
+
+        /* Tab Content Section Control */
+        .tab-content {
+            display: none; /* Hidden by default */
+        }
+        
+        .tab-content.active-tab {
+            display: block; /* Only show active tab view */
+        }
+
+        /* Main Section Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        /* Section Title featuring a Pinned Theme */
+        .section-title {
+            font-size: 2.5rem;
+            font-family: 'Pacifico', cursive;
+            color: #ff5e97;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            text-shadow: 2px 2px 0px #fff;
+        }
+
+        /* Video Grid Layout */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        /* Video Card Styling */
+        .video-card {
+            background: #ffffff;
+            border: 4px solid #ffccd9;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(255, 182, 193, 0.3);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            position: relative;
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(255, 145, 168, 0.5);
+        }
+
+        /* Video Container Aspect Ratio */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: #221f22;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Info below Card Embeds */
+        .video-info {
+            margin-top: 15px;
+        }
+
+        .video-info h3 {
+            margin: 10px 0 5px 0;
+            font-size: 1.4rem;
+            color: #ff5e97;
+        }
+
+        .video-info p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #a8768e;
+            line-height: 1.4;
+        }
+
+        /* Bottom Action Stripe */
+        .action-banner {
+            margin-top: 60px;
+            background: linear-gradient(90deg, #ff9ebe 0%, #ff689d 100%);
+            padding: 30px;
+            border-radius: 30px;
+            color: white;
+            box-shadow: 0 10px 25px rgba(255, 104, 157, 0.4);
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .action-banner:hover {
+            transform: scale(1.03);
+        }
+
+        .action-banner h2 {
+            margin: 0;
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation Menu -->
+    <header>
+        <div class="logo-area">
+            <span>✨</span> Mommy ASMR <span>✨</span>
+        </div>
+        <nav>
+            <a onclick="switchTab('home-tab')" id="nav-home-tab" class="nav-link active">Home</a>
+            <a onclick="switchTab('videos-tab')" id="nav-videos-tab" class="nav-link">Videos</a>
+            <a class="nav-link">Add Video</a>
+            <a class="nav-link">Features</a>
+            <a class="nav-link">Interactive</a>
+        </nav>
+    </header>
+
+    <!-- TAB 1: HOME (MAIN MENU VIEW) -->
+    <div id="home-tab" class="tab-content active-tab">
+        <div class="container">
+            <div class="section-title">
+                🌸 Featured Mommy ASMR Clips
+            </div>
+
+            <!-- Home Tab Video Grid -->
+            <div class="video-grid" id="homeGrid">
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://youtube.com" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Gentle Whispers</h3>
+                        <p>Come here, sweetheart… let Mommy hold you close and whisper how loved you are. Perfect for deep rest.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://youtube.com" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Personal Attention</h3>
+                        <p>You bring mommy so much comfort and peace. Meticulous care giving you all the focused attention you need tonight.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://youtube.com" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Cozy Bedtime Story</h3>
+                        <p>Mommy comforts you through the dark. A beautifully serene, calming audio to quiet your thoughts.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="action-banner" onclick="promptAddVideo('homeGrid')">
+                <h2>➕ Add Your Favorite Video</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: VIDEOS (ALL VIDEOS LIBRARY MENU) -->
+    <div id="videos-tab" class="tab-content">
+        <div class="container">
+            <div class="section-title">
+                🌸 Complete Video Library
+            </div>
+
+            <!-- Videos Tab Video Grid -->
+            <div class="video-grid" id="allVideosGrid">
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://youtube.com" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Soft Hair Brushing</h3>
+                        <p>Relax as Mommy gently brushes away all of your worries and stress from today.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://youtube.com" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Positive Affirmations</h3>
+                        <p>You are safe, you are cared for, and you are doing amazing. Listen to clear comfort.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://youtube.com" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Tucking You In</h3>
+                        <p>A comforting roleplay to pull up your blankets, dim the lights, and wish you sweet dreams.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="action-banner" onclick="promptAddVideo('allVideosGrid')">
+                <h2>➕ Add to Video Library</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Switch Functionality
+        function switchTab(tabId) {
+    <!-- JavaScript Interactive Functionality -->
+    <script>
+        // Tab Switch Functionality
+        function switchTab(tabId) {
+            // 1. Hide all active containers
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active-tab'));
+
+            // 2. Remove highlight states from all navigation buttons
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            // 3. Make target view block container visible
+            document.getElementById(tabId).classList.add('active-tab');
+
+            // 4. Highlight the specific chosen button
+            document.getElementById('nav-' + tabId).classList.add('active');
+        }
+
+        // Add Video Action Dialog 
+        function promptAddVideo(targetGridId) {
+            let videoUrl = prompt("Enter standard YouTube Video URL or Embed URL:");
+            if (!videoUrl) return; 
+
+            let title = prompt("Enter video title:", "New ASMR Clip");
+            if (!title) return;
+
+            let description = prompt("Enter a brief video description:", "Relax and enjoy this new upload.");
+            if (!description) return;
+
+            // Automatically clean URLs to dodge "refused to connect" frames
+            function getEmbedUrl(url) {
+                let videoId = '';
+                try {
+                    if (url.includes('watch?v=')) {
+                        // This fixes the exact part that got cut off in your code:
+                        videoId = url.split('v=')[1].split('&')[0];
+                    } else if (url.includes('youtu.be/')) {
+                        videoId = url.split('youtu.be/')[1].split('?')[0];
+                    } else if (url.includes('embed/')) {
+                        return url; 
+                    } else {
+                        return url; 
+                    }
+                    return "https://youtube.com" + videoId;
+                } catch(e) {
+                    return url;
+                }
+            }
+
+            let finalEmbedSrc = getEmbedUrl(videoUrl);
+
+            const newCard = document.createElement('div');
+            newCard.className = 'video-card';
+            newCard.innerHTML = `
+                <div class="video-wrapper">
+                    <iframe src="${finalEmbedSrc}" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>${title}</h3>
+                    <p>${description}</p>
+                </div>
+            `;
+
+            document.getElementById(targetGridId).appendChild(newCard);
+        }
+    </script>
+
